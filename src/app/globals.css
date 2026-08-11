@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  /* Base surfaces */
+  --color-void: #090909;
+  --color-surface: #131316;
+  --color-surface-2: #1b1b20;
+  --color-line: #2a2a30;
+
+  /* Ink */
+  --color-ink: #f5f5f2;
+  --color-ink-dim: #a3a3ab;
+  --color-ink-faint: #6b6b73;
+
+  /* Brand accents */
+  --color-accent-purple: #7c5cff;
+  --color-accent-cyan: #22d3ee;
+  --color-accent-red: #ff3b4e;
+
+  /* Per-universe glow colors */
+  --color-marvel: #ed1d24;
+  --color-dc: #2e7dff;
+  --color-potter: #c9a227;
+  --color-anime: #b14cff;
+  --color-gaming: #22d3ee;
+  --color-fantasy: #22c55e;
+  --color-movies: #f59e0b;
+
+  --font-display: var(--font-unbounded), sans-serif;
+  --font-sans: var(--font-inter), sans-serif;
+  --font-mono: var(--font-jbmono), monospace;
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-glow-pulse: glow-pulse 3.5s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-line;
+  }
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }  /* Light mode overrides the same variable names, so every bg-void / text-ink /
+     etc. utility automatically repaints — no component classes need to change. */
+  html.light {
+    --color-void: #fafaf9;
+    --color-surface: #f1f0ed;
+    --color-surface-2: #e7e5e0;
+    --color-line: #dcdad4;
+    --color-ink: #0b0b0d;
+    --color-ink-dim: #55555c;
+    --color-ink-faint: #85858c;
+  }
+  body {
+    @apply bg-void text-ink font-sans antialiased;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  ::selection {
+    @apply bg-accent-purple/40 text-ink;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent-cyan);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .noise-veil {
+    background-image: radial-gradient(
+        circle at 15% 10%,
+        color-mix(in oklab, var(--color-accent-purple) 18%, transparent),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 85% 25%,
+        color-mix(in oklab, var(--color-accent-cyan) 14%, transparent),
+        transparent 45%
+      );
+  }
+  .grid-veil {
+    background-image:
+      linear-gradient(to right, color-mix(in oklab, white 4%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in oklab, white 4%, transparent) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+}

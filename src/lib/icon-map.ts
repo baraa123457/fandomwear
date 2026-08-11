@@ -1,0 +1,52 @@
+import {
+  Zap,
+  ShieldHalf,
+  Sparkles,
+  Flame,
+  Gamepad2,
+  Swords,
+  Clapperboard,
+  Cpu,
+  Wand2,
+  MoonStar,
+  Anchor,
+  Wind,
+  ScanEye,
+  CircleDot,
+  Trees,
+  Axe,
+  Compass,
+  Blocks,
+  Star,
+  Feather,
+  Shield,
+  type LucideIcon,
+} from "lucide-react";
+
+export const iconMap: Record<string, LucideIcon> = {
+  Zap,
+  ShieldHalf,
+  Sparkles,
+  Flame,
+  Gamepad2,
+  Swords,
+  Clapperboard,
+  Cpu,
+  Wand2,
+  MoonStar,
+  Anchor,
+  Wind,
+  ScanEye,
+  CircleDot,
+  Trees,
+  Axe,
+  Compass,
+  Blocks,
+  Star,
+  Feather,
+  Shield,
+};
+
+export function resolveIcon(name: string): LucideIcon {
+  return iconMap[name] ?? Sparkles;
+}
