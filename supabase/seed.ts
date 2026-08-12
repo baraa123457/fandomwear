@@ -10,7 +10,8 @@
  *      Supabase SQL editor or `supabase db push` — see SUPABASE_SETUP.md.
  *   3. npm run db:seed
  */
-import "dotenv/config";
+import { config } from "dotenv";
+config({ path: ".env.local" });
 import { createClient } from "@supabase/supabase-js";
 import { products as seedProducts } from "../src/lib/data/products";
 import { universes as seedUniverses } from "../src/lib/data/universes";
